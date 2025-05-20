@@ -285,9 +285,9 @@ Because this? Us? It’s slow and real and growing in all the quiet ways that la
                                 <p class="text-sm mt-2">Because you deserve flowers every day</p>
                             </div>
                             <div class="bg-blue-50 p-4 rounded-lg text-center">
-                                <div class="text-6xl mb-2">🍫</div>
-                                <h3 class="text-xl handwriting">Box of Chocolates</h3>
-                                <p class="text-sm mt-2">Sweet like your kisses</p>
+                                <div class="text-6xl mb-2">🌟</div>
+                                <h3 class="text-xl handwriting">Jar of Stars</h3>
+                                <p class="text-sm mt-2">One for every reason I adore you.</p>
                             </div>
                             <div class="bg-blue-50 p-4 rounded-lg text-center">
                                 <div class="text-6xl mb-2">🥘</div>
