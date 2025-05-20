@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Florence - A Love Story</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Indie+Flower&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Indie Flower', cursive;
+            background: linear-gradient(to bottom, #fff5f5, #ffecec);
+            overflow-x: hidden;
+            color: #5a4a4a;
+        }
+        .handwriting {
+            font-family: 'Dancing Script', cursive;
+        }
+        .storefront {
+            perspective: 1000px;
+        }
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.7;
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        .memory-card {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        .memory-card:hover {
+            transform: translateY(-10px) rotateY(10deg);
+        }
+        .fortune-wheel {
+            transition: transform 3s cubic-bezier(0.17, 0.84, 0.44, 1);
+        }
+        .flower {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .flower:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        .starry-sky {
+            background: linear-gradient(to bottom, #0a0a2a, #1a1a4a);
+            position: relative;
+            overflow: hidden;
+        }
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        .plush-part {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .plush-part:hover {
+            filter: brightness(1.1);
+        }
+        .secret-door {
+            transition: all 0.5s ease;
+            transform-origin: left center;
+        }
+        .secret-door:hover {
+            transform: perspective(1000px) rotateY(-30deg);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Floating Hearts Background -->
+    <div id="hearts-container"></div>
+
+    <!-- Starry Sky Section -->
+    <div class="starry-sky h-64 w-full relative" id="starry-sky">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <h2 class="text-white text-3xl handwriting">I luh you bishhh</h2>
+        </div>
+    </div>
+
+    <!-- Main Storefront -->
+    <div class="container mx-auto px-4 py-12 storefront">
+        <div class="text-center mb-12">
+            <h1 class="text-5xl md:text-7xl font-bold handwriting text-pink-500 mb-4">Florence's Love Emporium</h1>
+            <p class="text-xl text-pink-400">A collection of all the reasons you're amazing</p>
+        </div>
+
+        <!-- 3D Store Sections -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+            <!-- Love Letters -->
+            <div class="bg-white bg-opacity-80 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                <div class="h-40 bg-pink-100 rounded-lg mb-4 flex items-center justify-center">
+                    <span class="text-6xl">💌</span>
+                </div>
+                <h3 class="text-2xl handwriting text-pink-600 mb-2">Love Letters</h3>
+                <p class="mb-4">Sweet notes written just for you</p>
+                <button onclick="openSection('letters')" class="bg-pink-400 hover:bg-pink-500 text-white px-4 py-2 rounded-full handwriting">Open Letters</button>
+            </div>
+
+            <!-- Memories Gallery -->
+            <div class="bg-white bg-opacity-80 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                <div class="h-40 bg-purple-100 rounded-lg mb-4 flex items-center justify-center">
+                    <span class="text-6xl">📸</span>
+                </div>
+                <h3 class="text-2xl handwriting text-purple-600 mb-2">Memory Lane</h3>
+                <p class="mb-4">Our special moments together</p>
+                <button onclick="openSection('memories')" class="bg-purple-400 hover:bg-purple-500 text-white px-4 py-2 rounded-full handwriting">View Gallery</button>
+            </div>
+
+            <!-- Virtual Gifts -->
+            <div class="bg-white bg-opacity-80 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                <div class="h-40 bg-blue-100 rounded-lg mb-4 flex items-center justify-center">
+                    <span class="text-6xl">🎁</span>
+                </div>
+                <h3 class="text-2xl handwriting text-blue-600 mb-2">Virtual Gifts</h3>
+                <p class="mb-4">Little presents to make you smile</p>
+                <button onclick="openSection('gifts')" class="bg-blue-400 hover:bg-blue-500 text-white px-4 py-2 rounded-full handwriting">Open Gifts</button>
+            </div>
+
+            <!-- Short Film Theater -->
+            <div class="bg-white bg-opacity-80 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                <div class="h-40 bg-red-100 rounded-lg mb-4 flex items-center justify-center">
+                    <span class="text-6xl">🎬</span>
+                </div>
+                <h3 class="text-2xl handwriting text-red-600 mb-2">Our Story</h3>
+                <p class="mb-4">A short film about us</p>
+                <button onclick="openSection('film')" class="bg-red-400 hover:bg-red-500 text-white px-4 py-2 rounded-full handwriting">Watch Film</button>
+            </div>
+
+            <!-- Build-a-Plush -->
+            <div class="bg-white bg-opacity-80 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                <div class="h-40 bg-yellow-100 rounded-lg mb-4 flex items-center justify-center">
+                    <span class="text-6xl">🧸</span>
+                </div>
+                <h3 class="text-2xl handwriting text-yellow-600 mb-2">Build-a-Plush</h3>
+                <p class="mb-4">Create your perfect cuddle buddy</p>
+                <button onclick="openSection('plush')" class="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-full handwriting">Customize</button>
+            </div>
+
+            <!-- Secret Room -->
+            <div class="bg-white bg-opacity-80 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                <div class="h-40 bg-green-100 rounded-lg mb-4 flex items-center justify-center secret-door">
+                    <span class="text-6xl">🔒</span>
+                </div>
+                <h3 class="text-2xl handwriting text-green-600 mb-2">Secret Room</h3>
+                <p class="mb-4">Special messages just for you</p>
+                <button onclick="showPasswordPrompt()" class="bg-green-400 hover:bg-green-500 text-white px-4 py-2 rounded-full handwriting">Enter Password</button>
+            </div>
+        </div>
+
+        <!-- Things I Love About You Carousel -->
+        <div class="mb-20">
+            <h2 class="text-3xl handwriting text-center text-pink-500 mb-8">Things I Love About You</h2>
+            <div class="relative h-64 overflow-hidden rounded-2xl bg-gradient-to-r from-pink-200 to-purple-200">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div id="love-carousel" class="text-center px-8">
+                        <p class="text-2xl handwriting text-pink-700">Your beautiful smile that lights up my world</p>
+                    </div>
+                </div>
+                <button onclick="prevLoveItem()" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow-md hover:bg-opacity-90">
+                    <span class="text-2xl">❮</span>
+                </button>
+                <button onclick="nextLoveItem()" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow-md hover:bg-opacity-90">
+                    <span class="text-2xl">❯</span>
+                </button>
+            </div>
+        </div>
+
+      
+
+       
+        <!-- Love Fortune Machine -->
+        <div class="mb-20 p-8 bg-gradient-to-r from-pink-200 to-purple-200 rounded-2xl shadow-lg">
+            <h2 class="text-3xl handwriting text-center text-purple-600 mb-6">Love Fortune Teller</h2>
+            <div class="flex flex-col items-center">
+                <div class="relative w-64 h-64 mb-8">
+                    <div class="absolute inset-0 bg-white rounded-full shadow-md flex items-center justify-center fortune-wheel" id="fortune-wheel">
+                        <span class="text-6xl">🔮</span>
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-80 rounded-lg p-4 min-h-20 w-full max-w-md text-center mb-6">
+                    <p id="fortune-text" class="text-lg handwriting">Press the button to get your love fortune!</p>
+                </div>
+                <button onclick="spinFortuneWheel()" class="bg-purple-500 hover:bg-purple-600 text-white px-8 py-3 rounded-full handwriting text-xl">Get Fortune</button>
+            </div>
+        </div>
+
+        <!-- Interactive Flower Garden -->
+        <div class="mb-20">
+            <h2 class="text-3xl handwriting text-center text-green-600 mb-8">Message Garden</h2>
+            <p class="text-center mb-8">Click on a flower to reveal a sweet message</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <div class="flower text-4xl text-center" onclick="showFlowerMessage('🌹', 'Your beauty is timeless like a rose')">🌹</div>
+                <div class="flower text-4xl text-center" onclick="showFlowerMessage('🌻', 'Your smile brightens my day like sunshine')">🌻</div>
+                <div class="flower text-4xl text-center" onclick="showFlowerMessage('🌸', 'Your kindness blooms wherever you go')">🌸</div>
+                <div class="flower text-4xl text-center" onclick="showFlowerMessage('🌺', 'Your passion inspires me every day')">🌺</div>
+                <div class="flower text-4xl text-center" onclick="showFlowerMessage('🌼', 'Your laughter is as refreshing as spring')">🌼</div>
+                <div class="flower text-4xl text-center" onclick="showFlowerMessage('🌷', 'Your love makes my heart blossom')">🌷</div>
+            </div>
+            <div class="mt-6 bg-white bg-opacity-80 rounded-lg p-4 min-h-20 text-center hidden" id="flower-message-container">
+                <p id="flower-message" class="text-lg handwriting"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-pink-500 bg-opacity-20 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="handwriting text-xl text-pink-700">Made with ❤️ for Florence</p>
+            <p class="mt-2">Every moment with you is a treasure</p>
+        </div>
+    </footer>
+
+    <!-- Modal for Sections -->
+    <div id="section-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-6 max-w-4xl w-full max-h-screen overflow-y-auto relative">
+            <button onclick="closeSection()" class="absolute top-4 right-4 text-2xl">✕</button>
+            <div id="modal-content">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Prompt -->
+    <div id="password-prompt" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-6 max-w-md w-full">
+            <h3 class="text-2xl handwriting text-purple-600 mb-4">Enter Secret Password</h3>
+            <input type="password" id="password-input" class="w-full px-4 py-2 border rounded-lg mb-4" placeholder="Our special date (MMDDYY)">
+            <div class="flex justify-between">
+                <button onclick="hidePasswordPrompt()" class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-full">Cancel</button>
+                <button onclick="checkPassword()" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-full">Enter</button>
+            </div>
+        </div>
+    </div>
+<script src="script.js"></script>
+    
+<p /a></p></body>
+</html>
